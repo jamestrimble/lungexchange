@@ -1,0 +1,5 @@
+temp*.txt
+instances/
+*.pyc
+gen_data.json
+*.log

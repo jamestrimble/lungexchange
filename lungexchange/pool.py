@@ -144,18 +144,33 @@ class Pool(object):
         return sum(p.n_compatible_paired_donors()>=2 for p in self.patients)
 
     def create_donor_patient_arcs(self, use_weight=True):
+        """
+        For each donor, add to the donor's compat_patients list those
+        patients to whom the donor can donate. An exception is made for patients
+        who have two or more compatible paired donors. Such a patient's paired
+        donors have no outgoing arcs to other patients. Furthermore, such a
+        patient has no incoming arcs from other patients' paired donors.
+        """
+        
+        # Create a set of patients who can receive transplants from
+        # both of their paired donors
+        direct_donation_patients = set()
+
         for patient in self.patients:
             if sum(donor.is_compatible(patient, use_weight)
                          for donor in patient.paired_donors) >= 2:
-                # The patient has two compatible paired donors, so only add arcs
-                # from the patient's donors to the patient
+                direct_donation_patients.add(patient)
                 for donor in patient.paired_donors:
-                    donor.compat_patients.append(patient)
-            else:
+                    if donor.is_compatible(patient):
+                        donor.compat_patients.append(patient)
+
+        for patient in self.patients:
+            if patient not in direct_donation_patients:
                 for donor in patient.paired_donors:
-                    for patient in self.patients:
-                        if donor.is_compatible(patient, use_weight):
-                            donor.compat_patients.append(patient)
+                    for patient2 in self.patients:
+                        if (patient2 not in direct_donation_patients and
+                                    donor.is_compatible(patient2, use_weight)):
+                            donor.compat_patients.append(patient2)
 
 
     def find_exchanges(self, max_size):

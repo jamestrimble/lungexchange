@@ -65,3 +65,5 @@ The first four columns are (1) file name, (2) an indictor for whether donor and 
 More verbose output can be viewed using:
     
     python lungexchange/optimise_verbose.py instance.txt 4
+
+Note that if a patient P is compatible with two of P's own paired donors, then the program does not identify compatibilities between P and any other patient's paired donors, or between P's paired donors and any other patient.

@@ -2,7 +2,7 @@
 
 The concept of a _lung exchange_ scheme is similar to that of a kidney
 exchange scheme, with a key difference being that each patient in a
-lung exchange scheme would require two donors rather than one. To the
+lung exchange scheme requires two donors rather than one. To the
 best of my knowledge, lung exchange has not yet been implemented in
 practice, but the following recent papers discuss theoretical foundations:
 
@@ -60,7 +60,7 @@ The command-line arguments are instance file name, maximum permitted cycle size,
 
     instance.txt    1   50  48.0    18.0    28.0    34.0    40.0    5
 
-The first four columns are (1) file name, (2) and indictor which is 1 if True was specified for using donor and patient weights, (3) number of patients in the instance, and (4) number of donors used in an optimal solution with unrestricted exchange size. The final column is the number of patients in the instance who have two compatible paired donors. The remaining columns are the number of donors used in an optimal solution with an exchange size limit of 2, 3, ..., n. Note that if a patient's two donors are able to give directly to the patient, these both count towards the optimal value.
+The first four columns are (1) file name, (2) an indictor for whether donor and patient weights were used to determine compatibility, (3) number of patients in the instance, and (4) number of donors used in an optimal solution with unrestricted exchange size. The final column is the number of patients in the instance who have two compatible paired donors. The remaining columns are the number of donors used in an optimal solution with an exchange size limit of 2, 3, ..., n. Note that if a patient's two donors are able to give directly to the patient, these both count towards the optimal value.
 
 More verbose output can be viewed using:
     

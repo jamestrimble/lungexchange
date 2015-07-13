@@ -26,7 +26,42 @@ for:
 - Optimisation with bounded exchange size, with a variable for each feasible
   exchange.
 
+## Requirements
+
+[Google or-tools](https://developers.google.com/optimization/installing) is required for solving integer programs.
+
 ## Notes on usage
 
+### Generator
 
+To generate a lung-exchange instance with 2 patients and 4 donors, run the following command.
 
+    python lungexchange/lung_generator.py 2
+
+I have tried to closely imitate the generator described by Ergin et al. The generator outputs an instance like this:
+
+    2 4
+    CF M 40 O 236
+    CF F 18 A 177
+    0 F 62 O 185
+    0 M 42 O 187
+    1 F 27 A 139
+    1 F 27 A 145
+
+The first row gives (number of patients), (number of donors). The patients follow, with each row showing condition (cystic fibrosis or pulmonary hypertension), gender, age, blood type, and weight. The remaining rows are donors in the format paired-patient-ID, gender, age, blood type, weight.
+
+### Optimisation
+
+To find the number of transplants in an optimal solution, run:
+
+    python lungexchange/optimise.py instance.txt 5 True
+
+The command-line arguments are instance file name, maximum permitted cycle size, and whether weights should be taken into account whether a donor is compatible with a patient. The results look like:
+
+    instance.txt    1   50  48.0    18.0    28.0    34.0    40.0    5
+
+The first four columns are (1) file name, (2) and indictor which is 1 if True was specified for using donor and patient weights, (3) number of patients in the instance, and (4) number of donors used in an optimal solution with unrestricted exchange size. The final column is the number of patients in the instance who have two compatible paired donors. The remaining columns are the number of donors used in an optimal solution with an exchange size limit of 2, 3, ..., n. Note that if a patient's two donors are able to give directly to the patient, these both count towards the optimal value.
+
+More verbose output can be viewed using:
+    
+    python lungexchange/optimise_verbose.py instance.txt 4

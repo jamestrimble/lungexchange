@@ -2,7 +2,7 @@
 
 The concept of a _lung exchange_ scheme is similar to that of a kidney
 exchange scheme, with a key difference being that each patient in a
-lung exchange scheme would requires two donors rather than one. To the
+lung exchange scheme would require two donors rather than one. To the
 best of my knowledge, lung exchange has not yet been implemented in
 practice, but the following recent papers discuss theoretical foundations:
 

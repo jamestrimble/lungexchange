@@ -161,7 +161,7 @@ class Pool(object):
                          for donor in patient.paired_donors) >= 2:
                 direct_donation_patients.add(patient)
                 for donor in patient.paired_donors:
-                    if donor.is_compatible(patient):
+                    if donor.is_compatible(patient, use_weight):
                         donor.compat_patients.append(patient)
 
         for patient in self.patients:

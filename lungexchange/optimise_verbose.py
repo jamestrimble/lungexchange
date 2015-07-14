@@ -22,7 +22,7 @@ def start(filename, max_size):
     print "....", len(unique_exch)
 
     def edge_score_fun(e):
-        return 1 + (e.patient.weight - e.donor.weight)/999.0
+        return 1# + (e.patient.weight - e.donor.weight)/999.0
 
     print "Optimal exchanges with restricted cycle size (cycle formulation):"
     obj_val, optimal_exchanges = pool.solve_cycle_formulation(max_size, edge_score_fun)
